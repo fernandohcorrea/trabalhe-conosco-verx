@@ -22,6 +22,18 @@ services:
       - backend
     command: ["yarn", "start:dev"]
 
+  postgres:
+    build:
+      context: ./docker/services/postgres
+    container_name: ${DK_PROJECT_NAME}_postgres
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DATABASES: "${POSTGRES_DATABASES}"
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    networks:
+      - backend
+
 networks:
   backend:
     driver: bridge
