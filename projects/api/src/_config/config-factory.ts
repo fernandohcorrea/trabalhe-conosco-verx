@@ -1,5 +1,6 @@
 import { ConfigFactory } from '@nestjs/config';
 import * as path from 'node:path';
+import databases from './databases';
 
 export const cfg: ConfigFactory = async () => {
   const config_data = {
@@ -20,7 +21,7 @@ export const cfg: ConfigFactory = async () => {
     /**
      * Databases configs
      */
-    // databases,
+    databases,
   };
 
   return config_data;
