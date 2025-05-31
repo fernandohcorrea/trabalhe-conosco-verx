@@ -1,0 +1,3 @@
+[submodule "projects/api"]
+	path = projects/api
+	branch = development

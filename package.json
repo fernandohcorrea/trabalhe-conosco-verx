@@ -23,6 +23,36 @@
     "prestart": "npm run build",
     "start": "node bin/quimera.js"
   },
+  "quimera": {
+    "dockerCompose": {
+      "command": "docker compose",
+      "volumes": [
+        {
+          "path": "./docker/volumes/storagefs"
+        },
+        {
+          "path": "./docker/volumes/postgres"
+        }
+      ]
+    },
+    "git": {
+      "default": {
+        "branch": "development"
+      }
+    },
+    "packageManager": {
+      "submodules": {
+        "projects/api": {
+          "exec": "yarn"
+        }
+      },
+      "default": {
+        "exec": "yarn",
+        "install_args": [],
+        "build_args": []
+      }
+    }
+  },
   "dependencies": {
     "@types/node": "^18.7.14",
     "ansi-colors": "^4.1.3",

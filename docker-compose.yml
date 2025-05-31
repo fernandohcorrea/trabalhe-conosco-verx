@@ -1,0 +1,27 @@
+x-api-environment: &default-api-environment
+  NODE_ENV: ${DK_ENVIRONMENT}
+  API_PORT: ${API_PORT}
+  API_DEBUG_PORT: ${API_DEBUG_PORT}
+
+services:
+  api:
+    build:
+      context: ./projects/api
+      dockerfile: Dockerfile.${DK_ENVIRONMENT}
+      args:
+        DK_UID: ${DK_UID}
+        DK_GID: ${DK_GID}
+    container_name: ${DK_PROJECT_NAME}_api
+    ports:
+      - "${API_PORT}:${API_PORT}"
+      - "${API_DEBUG_PORT}:${API_DEBUG_PORT}"
+    environment: *default-api-environment
+    volumes:
+      - ${PWD}/projects/api:/home/node/project
+    networks:
+      - backend
+    command: ["yarn", "start:dev"]
+
+networks:
+  backend:
+    driver: bridge
