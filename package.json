@@ -1,0 +1,41 @@
+{
+  "name": "trabalhe-conosco-verx",
+  "version": "1.0.0",
+  "description": "Teste para Vaga Back-end Sênior - Node",
+  "keywords": [
+    "Teste",
+    "Verx"
+  ],
+  "homepage": "https://github.com/fernandohcorrea/trabalhe-conosco-verx#readme",
+  "bugs": {
+    "url": "https://github.com/fernandohcorrea/trabalhe-conosco-verx/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandohcorrea/trabalhe-conosco-verx.git"
+  },
+  "license": "PRIV",
+  "author": "Fernando Henrique Corrêa",
+  "type": "module",
+  "main": "quimera",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "prestart": "npm run build",
+    "start": "node bin/quimera.js"
+  },
+  "dependencies": {
+    "@types/node": "^18.7.14",
+    "ansi-colors": "^4.1.3",
+    "commander": "^10.0.0",
+    "json-to-pretty-yaml": "^1.2.2",
+    "nconf": "^0.12.0",
+    "readline-sync": "^1.4.10",
+    "shelljs": "^0.8.5",
+    "typescript": "^4.8.2"
+  },
+  "devDependencies": {
+    "@types/nconf": "^0.10.3",
+    "@types/readline-sync": "^1.4.4",
+    "@types/shelljs": "^0.8.11"
+  }
+}
