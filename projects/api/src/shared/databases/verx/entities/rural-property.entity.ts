@@ -1,20 +1,21 @@
 import { Exclude } from 'class-transformer';
 import { DateTime } from 'luxon';
 import {
+  AfterLoad,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { DocumentType } from '../constants/database-types';
+import { RuralProducer } from './rural-producer.entity';
 import { Address } from './address.entity';
 
-@Entity({ name: 'rural_producers' })
-export class RuralProducer {
+@Entity({ name: 'rural_properties' })
+export class RuralProperty {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -22,13 +23,13 @@ export class RuralProducer {
   name: string;
 
   @Column()
-  document: string;
+  rural_producer_id: number;
 
-  @Column({
-    type: 'enum',
-    enum: [DocumentType.CPF, DocumentType.CNPJ],
-  })
-  document_type: DocumentType;
+  @Column()
+  address_id: number;
+
+  @Column('numeric', { precision: 8, scale: 3 })
+  hectares: number;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -52,17 +53,18 @@ export class RuralProducer {
    * Relations
    * ***************/
 
-  @ManyToMany(() => Address)
-  @JoinTable({
-    name: 'rural_producers_addresses',
-    joinColumn: {
-      name: 'rural_producer_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'address_id',
-      referencedColumnName: 'id',
-    },
-  })
-  addresses: Address[];
+  @OneToOne(() => RuralProducer)
+  @JoinColumn({ name: 'rural_producer_id' })
+  rural_producer: RuralProducer;
+
+  @OneToOne(() => Address)
+  @JoinColumn({ name: 'address_id' })
+  address: Address;
+
+  @AfterLoad()
+  afterLoadEvent() {
+    if (this.hectares) {
+      this.hectares = Number(this.hectares);
+    }
+  }
 }
