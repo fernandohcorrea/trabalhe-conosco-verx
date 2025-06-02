@@ -7,17 +7,14 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { RuralProducer } from './rural-producer.entity';
-import { Address } from './address.entity';
-import { Plot } from './plot.entity';
+import { RuralProperty } from './rural-property.entity';
 
-@Entity({ name: 'rural_properties' })
-export class RuralProperty {
+@Entity({ name: 'plots' })
+export class Plot {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,10 +22,7 @@ export class RuralProperty {
   name: string;
 
   @Column()
-  rural_producer_id: number;
-
-  @Column()
-  address_id: number;
+  rural_property_id: number;
 
   @Column('numeric', { precision: 8, scale: 3 })
   hectares: number;
@@ -55,16 +49,9 @@ export class RuralProperty {
    * Relations
    * ***************/
 
-  @OneToOne(() => RuralProducer)
-  @JoinColumn({ name: 'rural_producer_id' })
-  rural_producer: RuralProducer;
-
-  @OneToOne(() => Address)
-  @JoinColumn({ name: 'address_id' })
-  address: Address;
-
-  @OneToMany(() => Plot, (plot) => plot.rural_property)
-  plots: Plot[];
+  @OneToOne(() => RuralProperty)
+  @JoinColumn({ name: 'rural_property_id' })
+  rural_property: RuralProperty;
 
   @AfterLoad()
   afterLoadEvent() {
