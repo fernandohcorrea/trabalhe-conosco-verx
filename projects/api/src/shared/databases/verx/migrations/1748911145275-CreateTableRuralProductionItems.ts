@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { SeedRuralProductionItems1748911145275 as Seed } from '../seeders/1748911145275-SeedRuralProductionItems';
 
 export class CreateTableRuralProductionItems1748911145275
   implements MigrationInterface
@@ -44,6 +45,9 @@ export class CreateTableRuralProductionItems1748911145275
         ],
       }),
     );
+
+    const seed = new Seed();
+    await seed.up(queryRunner);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
