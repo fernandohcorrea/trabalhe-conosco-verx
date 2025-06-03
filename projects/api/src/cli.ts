@@ -4,7 +4,7 @@ import { CliModule } from './cli/cli.module';
 
 async function bootstrap() {
   const cli = await NestFactory.createApplicationContext(CliModule, {
-    logger: false,
+    // logger: false,
   });
 
   try {

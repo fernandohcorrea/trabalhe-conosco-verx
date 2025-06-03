@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table, TableIndex } from 'typeorm';
+import { SeedHarvests1748894444155 as Seed } from '../seeders/1748894444155-SeedHarvests';
 
 export class CreateTableHaverts1748894444155 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -51,6 +52,9 @@ export class CreateTableHaverts1748894444155 implements MigrationInterface {
         isUnique: true,
       }),
     );
+
+    const seed = new Seed();
+    await seed.up(queryRunner);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
