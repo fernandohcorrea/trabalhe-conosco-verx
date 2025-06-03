@@ -25,7 +25,7 @@ services:
       - ${PWD}/projects/api:/home/node/project
     networks:
       - backend
-    command: ["yarn", "start:dev"]
+    command: ["yarn", "start:debug"]
 
   postgres:
     build:

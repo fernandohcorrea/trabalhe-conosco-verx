@@ -1,5 +1,4 @@
 import { Exclude } from 'class-transformer';
-import { DateTime } from 'luxon';
 import {
   AfterLoad,
   Column,
@@ -7,11 +6,13 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { RuralProperty } from './rural-property.entity';
+import { HarvestProduction } from './harvest-production.entity';
 
 @Entity({ name: 'plots' })
 export class Plot {
@@ -31,7 +32,7 @@ export class Plot {
     type: 'timestamp',
     default: () => 'NOW()',
   })
-  created_at: DateTime;
+  created_at: Date;
 
   @Exclude()
   @UpdateDateColumn({
@@ -39,11 +40,11 @@ export class Plot {
     default: () => 'NOW()',
     onUpdate: 'NOW()',
   })
-  updated_at: DateTime;
+  updated_at: Date;
 
   @Exclude()
   @DeleteDateColumn({ type: 'timestamp' })
-  deleted_at?: DateTime;
+  deleted_at?: Date;
 
   /* ****************
    * Relations
@@ -52,6 +53,12 @@ export class Plot {
   @OneToOne(() => RuralProperty)
   @JoinColumn({ name: 'rural_property_id' })
   rural_property: RuralProperty;
+
+  @OneToMany(
+    () => HarvestProduction,
+    (harvest_production) => harvest_production.plot,
+  )
+  harvest_productions: HarvestProduction[];
 
   @AfterLoad()
   afterLoadEvent() {

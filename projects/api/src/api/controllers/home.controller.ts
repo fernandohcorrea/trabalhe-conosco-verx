@@ -6,7 +6,7 @@ export class HomeController {
   constructor(private readonly homeService: HomeService) {}
 
   @Get()
-  getHello(): string {
-    return this.homeService.getHello();
+  async getHello(): Promise<any> {
+    return await this.homeService.getHello();
   }
 }

@@ -1,5 +1,4 @@
 import { Exclude } from 'class-transformer';
-import { DateTime } from 'luxon';
 import {
   Column,
   CreateDateColumn,
@@ -24,7 +23,7 @@ export class RuralProductionItem {
     type: 'timestamp',
     default: () => 'NOW()',
   })
-  created_at: DateTime;
+  created_at: Date;
 
   @Exclude()
   @UpdateDateColumn({
@@ -32,9 +31,9 @@ export class RuralProductionItem {
     default: () => 'NOW()',
     onUpdate: 'NOW()',
   })
-  updated_at: DateTime;
+  updated_at: Date;
 
   @Exclude()
   @DeleteDateColumn({ type: 'timestamp' })
-  deleted_at?: DateTime;
+  deleted_at?: Date;
 }

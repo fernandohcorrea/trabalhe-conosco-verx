@@ -1,28 +1,3 @@
-import { hash } from 'bcryptjs';
-import { createHash } from 'node:crypto';
-import { DateTime } from 'luxon';
-
-/**
- * Get Default Password
- *
- * @return  {Promise<string>}[return description]
- */
-const getDefaultPassword = async (): Promise<string> => {
-  const passwd = '1q2w3e$R!';
-  return await genHashPassword(passwd);
-};
-
-/**
- * Gen Hash Password
- *
- * @param   {string}   password
- * @return  {Promise<string>}
- */
-const genHashPassword = async (password: string): Promise<string> => {
-  const hash256 = createHash('sha256').update(password).digest('hex');
-  return await hash(hash256, 12);
-};
-
 /**
  * Gen CPF
  *
@@ -74,22 +49,6 @@ const strSanitize = (str: string): string => {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9 ]/gi, '');
-};
-
-/**
- * Generate String ID
- * @see https://moment.github.io/luxon/#/formatting?id=table-of-tokens
- * @return  {string}
- */
-const genStrId = (): string => {
-  const nonce = Math.floor(Math.random() * 10000000);
-  const dt = DateTime.now().toFormat('x');
-  const hash = createHash('sha256')
-    .update(`${nonce}.${dt}`)
-    .digest('hex')
-    .toUpperCase();
-
-  return `${dt}.${hash.substring(0, 6)}${nonce.toString().substring(0, 1)}`;
 };
 
 /**
@@ -178,12 +137,4 @@ const genCnpj = (format = false): string => {
   return `${cnpj}`;
 };
 
-export {
-  genHashPassword,
-  getDefaultPassword,
-  genCpf,
-  strSanitize,
-  genStrId,
-  genCnpj,
-  validateCnpj,
-};
+export { genCpf, strSanitize, genCnpj, validateCnpj };

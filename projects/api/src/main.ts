@@ -1,6 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { ApiModule } from './api/api.module';
+import { Settings } from 'luxon';
+
+Settings.defaultZone = 'America/Sao_Paulo';
+Settings.defaultLocale = 'pt-BR';
 
 async function bootstrap() {
   const main = await NestFactory.create(ApiModule);

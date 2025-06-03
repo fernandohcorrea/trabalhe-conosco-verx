@@ -6,31 +6,30 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { RuralProducer } from './rural-producer.entity';
-import { Address } from './address.entity';
 import { Plot } from './plot.entity';
+import { Harvest } from './harvest.entity';
+import { RuralProductionItem } from './rural-production-item.entity';
 
-@Entity({ name: 'rural_properties' })
-export class RuralProperty {
+@Entity({ name: 'harvest_productions' })
+export class HarvestProduction {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  plot_id: number;
 
   @Column()
-  rural_producer_id: number;
+  harvest_id: number;
 
   @Column()
-  address_id: number;
+  rural_production_item_id: number;
 
   @Column('numeric', { precision: 8, scale: 3 })
-  hectares: number;
+  production_tons: number;
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -54,21 +53,22 @@ export class RuralProperty {
    * Relations
    * ***************/
 
-  @OneToOne(() => RuralProducer)
-  @JoinColumn({ name: 'rural_producer_id' })
-  rural_producer: RuralProducer;
+  @OneToOne(() => Plot)
+  @JoinColumn({ name: 'plot_id' })
+  plot: Plot;
 
-  @OneToOne(() => Address)
-  @JoinColumn({ name: 'address_id' })
-  address: Address;
+  @OneToOne(() => Harvest)
+  @JoinColumn({ name: 'harvest_id' })
+  harvest: Harvest;
 
-  @OneToMany(() => Plot, (plot) => plot.rural_property)
-  plots: Plot[];
+  @OneToOne(() => RuralProductionItem)
+  @JoinColumn({ name: 'rural_production_item_id' })
+  rural_production_item: RuralProductionItem;
 
   @AfterLoad()
   afterLoadEvent() {
-    if (this.hectares) {
-      this.hectares = Number(this.hectares);
+    if (this.production_tons) {
+      this.production_tons = Number(this.production_tons);
     }
   }
 }

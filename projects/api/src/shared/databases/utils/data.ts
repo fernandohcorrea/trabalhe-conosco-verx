@@ -256,22 +256,6 @@ const randomData = (data_in: any[], elements = 1): any => {
   return result;
 };
 
-/**
- * Get Query Insert User
- *
- * @return  {string}
- */
-const getQueryInsertUser = (): string => {
-  const query = [
-    `INSERT INTO users (`,
-    ` name, `,
-    ` email,`,
-    ` password`,
-    `) VALUES (?, ?, ?)`,
-  ].join(' ');
-  return query;
-};
-
 export {
   getData,
   tableExists,
@@ -283,5 +267,4 @@ export {
   getRandomRecordFromTable,
   getFirstData,
   randomData,
-  getQueryInsertUser,
 };
