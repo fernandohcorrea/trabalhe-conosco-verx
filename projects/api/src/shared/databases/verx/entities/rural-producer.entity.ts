@@ -30,7 +30,7 @@ export class RuralProducer {
     type: 'enum',
     enum: [DocumentType.CPF, DocumentType.CNPJ],
   })
-  document_type: DocumentType;
+  document_type: string;
 
   @CreateDateColumn({
     type: 'timestamp',
