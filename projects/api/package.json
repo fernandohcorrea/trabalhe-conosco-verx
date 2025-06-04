@@ -21,6 +21,7 @@
     "migration:schema-drop": "npm run chkenv:prod && npx typeorm schema:drop -d ./dist/shared/databases/verx/verx.datasource.js",
     "migration:re-build-all": "npm run build && npm run migration:schema-drop && npm run migration:run",
     "waitfor:srv-postgres": "./wait-for -t 15 ${POSTGRES_HOST}:${POSTGRES_PORT}",
+    "populate": "npm run chkenv:prod && npx nestjs-command populate -f 3",
     "chkenv:prod": "[ $NODE_ENV != \"production\" ] && exit 0 || exit 1"
   },
   "dependencies": {
