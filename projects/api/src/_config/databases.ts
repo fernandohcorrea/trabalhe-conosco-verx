@@ -9,6 +9,7 @@ const verx: DataSourceOptions = {
   username: process.env.DB_VERX_USER || '',
   password: process.env.DB_VERX_PASSWORD || '',
   database: process.env.DB_VERX_DATABASE || '',
+  // logging: 'all',
   entities: [
     [
       path.join(__dirname, `../`, '/shared/databases/verx/entities'),

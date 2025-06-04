@@ -11,23 +11,24 @@ const tableExists = async (
   queryRunner: QueryRunner,
   table_name: string,
 ): Promise<boolean> => {
-  const data: [{ existsTable: number }] = await queryRunner.query(
+  const data = await queryRunner.query(
     [
-      `SELECT EXISTS (`,
-      `  SELECT `,
-      `      TABLE_NAME`,
-      `  FROM `,
-      `    information_schema.TABLES `,
-      `  WHERE `,
-      `  TABLE_SCHEMA LIKE ? AND `,
-      `    TABLE_TYPE LIKE 'BASE TABLE' AND`,
-      `    TABLE_NAME = ?`,
-      `) as existsTable`,
+      'SELECT EXISTS (',
+      'SELECT 1',
+      '  FROM information_schema.columns',
+      'WHERE',
+      '  table_schema = $1',
+      '  AND table_name = $2',
+      ');',
     ].join(' '),
-    [process.env.MARIADB_DATABASE, table_name],
+    ['public', table_name],
   );
 
-  return data[0].existsTable == 1 ? true : false;
+  if (data.pop().exists == true) {
+    return true;
+  }
+
+  return false;
 };
 
 /**
@@ -45,20 +46,23 @@ const columnExists = async (
 ): Promise<boolean> => {
   const data = await queryRunner.query(
     [
-      `SELECT *`,
-      `FROM `,
-      `   information_schema.COLUMNS `,
-      `WHERE `,
-      `   TABLE_SCHEMA = ? `,
-      `AND`,
-      `    TABLE_NAME = ?`,
-      `AND`,
-      `    COLUMN_NAME = ?`,
+      'SELECT EXISTS (',
+      'SELECT 1',
+      '  FROM information_schema.columns',
+      'WHERE',
+      '  table_schema = $1',
+      '  AND table_name = $2',
+      '  AND column_name = $3',
+      ');',
     ].join(' '),
-    [process.env.MARIADB_DATABASE, table_name, table_column],
+    ['public', table_name, table_column],
   );
 
-  return data.length > 0;
+  if (data.pop().exists == true) {
+    return true;
+  }
+
+  return false;
 };
 
 /**
@@ -109,9 +113,11 @@ const insertIntoTable = async (
     throw new Error(`Columns and values doesn't match [${table_name}]`);
   }
 
-  const string_bind = '?';
-  const repeat_string_bind = string_bind.repeat(table_values.length).split('');
-  const binds = repeat_string_bind.join();
+  const fields = [];
+  for (let i = 1; i <= table_columns.length; i++) {
+    fields.push(`$${i}`);
+  }
+  const binds = fields.join(',');
 
   const data = await queryRunner.query(
     [`INSERT INTO ${table_name} (${table_columns}) VALUES (${binds})`].join(
@@ -152,7 +158,7 @@ const getRandomRecordFromTable = async (
   table_name: string,
 ): Promise<any | null> => {
   const data = await queryRunner.query(
-    `SELECT * FROM ${table_name} ORDER BY RAND() LIMIT 1`,
+    `SELECT * FROM ${table_name} ORDER BY RANDOM() LIMIT 1`,
   );
 
   return data ? data.shift() : null;
@@ -171,10 +177,12 @@ const getData = async (
   table_name: string,
   limit = 100,
 ): Promise<any> => {
-  const data = await queryRunner.query(
-    `SELECT * FROM ${table_name} WHERE 1=1 LIMIT ?`,
-    [limit],
-  );
+  const data = await queryRunner.manager
+    .createQueryBuilder()
+    .select()
+    .from(table_name, 'tbl')
+    .limit(limit)
+    .getRawMany();
 
   return data;
 };
@@ -194,7 +202,7 @@ const getDataByID = async (
   id: number,
 ): Promise<any> => {
   const data = await queryRunner.query(
-    `SELECT * FROM ${table_name} WHERE id = ?`,
+    `SELECT * FROM ${table_name} WHERE id = $1`,
     [id],
   );
 
