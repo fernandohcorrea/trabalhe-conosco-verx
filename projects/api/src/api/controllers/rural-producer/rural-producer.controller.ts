@@ -27,7 +27,7 @@ export class RuralProducerController {
   }
 
   @Post('/')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.CREATED)
   async createData(@Body() data: CreateRuralProducerDTO): Promise<any> {
     return await this.ruralProducerService.createData(data);
   }

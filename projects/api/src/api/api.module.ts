@@ -7,6 +7,7 @@ import { RuralPropertyModule } from './controllers/rural-property/rural-property
 import { PlotModule } from './controllers/plot/plot.module';
 import { HarvestModule } from './controllers/harvest/harvest.module';
 import { RuralProductionItemModule } from './controllers/rural-production-item/rural-production-item.module';
+import { HarvestProductionModule } from './controllers/harvest-production/harvest-production.module';
 @Module({
   imports: [
     CfgModule,
@@ -17,6 +18,7 @@ import { RuralProductionItemModule } from './controllers/rural-production-item/r
     PlotModule,
     HarvestModule,
     RuralProductionItemModule,
+    HarvestProductionModule,
   ],
 })
 export class ApiModule {}

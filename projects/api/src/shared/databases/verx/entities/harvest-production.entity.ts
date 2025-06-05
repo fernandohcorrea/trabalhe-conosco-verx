@@ -1,14 +1,10 @@
-import { Exclude } from 'class-transformer';
 import {
   AfterLoad,
   Column,
-  CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { Plot } from './plot.entity';
 import { Harvest } from './harvest.entity';
@@ -30,24 +26,6 @@ export class HarvestProduction {
 
   @Column('numeric', { precision: 8, scale: 3 })
   production_tons: number;
-
-  @CreateDateColumn({
-    type: 'timestamp',
-    default: () => 'NOW()',
-  })
-  created_at: Date;
-
-  @Exclude()
-  @UpdateDateColumn({
-    type: 'timestamp',
-    default: () => 'NOW()',
-    onUpdate: 'NOW()',
-  })
-  updated_at: Date;
-
-  @Exclude()
-  @DeleteDateColumn({ type: 'timestamp' })
-  deleted_at?: Date;
 
   /* ****************
    * Relations

@@ -24,7 +24,7 @@ export class AddressController {
   }
 
   @Post('/')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.CREATED)
   async createData(@Body() data: CreateAddressDTO): Promise<any> {
     return await this.addressService.createData(data);
   }
