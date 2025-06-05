@@ -1,3 +1,4 @@
+import { AttachAddressDTO } from './dtos/attach-address.dto';
 import { CreateRuralProducerDTO } from './dtos/create-rural-producer.dto';
 import { UpdateRuralProducerDTO } from './dtos/update-rural-producer.dto';
 import { RuralProducerService } from './rural-producer.service';
@@ -44,5 +45,11 @@ export class RuralProducerController {
   @HttpCode(HttpStatus.OK)
   async deteteData(@Param('id') id: number): Promise<any> {
     return await this.ruralProducerService.deleteData(id);
+  }
+
+  @Post('/attach-address')
+  @HttpCode(HttpStatus.OK)
+  async attachAddressData(@Body() data: AttachAddressDTO): Promise<any> {
+    return await this.ruralProducerService.attachAddressData(data);
   }
 }
