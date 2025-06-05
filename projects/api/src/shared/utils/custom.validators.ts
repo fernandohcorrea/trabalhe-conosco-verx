@@ -315,3 +315,38 @@ function validCalc(x: number, numbers: number[]): number {
 
   return result > 9 ? 0 : result;
 }
+
+export function IsZipCode(
+  validationOptions?: ValidationOptions,
+): PropertyDecorator {
+  if (!validationOptions) {
+    validationOptions = {
+      message: 'The field must be a valid ZIP Code numbers',
+    };
+  }
+  return function (object: any, propertyName: string) {
+    registerDecorator({
+      name: 'IsZipCode',
+      target: object.constructor,
+      propertyName: propertyName,
+      constraints: [],
+      options: validationOptions,
+      validator: {
+        validate(value: any) {
+          return zipCodeValidate(`${value}`);
+        },
+      },
+    });
+  };
+}
+
+export function zipCodeValidate(
+  value: string | number | number[] = '',
+): boolean {
+  const data = `${value}`.replace(/[^\d]/g, '');
+
+  if (data.length == 8) {
+    return true;
+  }
+  return false;
+}
