@@ -40,7 +40,7 @@ export class RuralProducerService {
       }
 
       throw new HttpCustomException({
-        status: HttpStatus.CONFLICT,
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
         message: 'Failed to create Rural Producer!',
       });
     }
