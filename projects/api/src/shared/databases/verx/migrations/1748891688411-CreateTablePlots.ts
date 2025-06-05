@@ -7,6 +7,10 @@ import {
 
 export class CreateTablePlots1748891688411 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(
+      "CREATE TYPE plot_type_enum AS ENUM ('RESERVED', 'PLANTING_AREA');",
+    );
+
     await queryRunner.createTable(
       new Table({
         name: 'plots',
@@ -25,6 +29,11 @@ export class CreateTablePlots1748891688411 implements MigrationInterface {
           {
             name: 'name',
             type: 'varchar(100)',
+            isNullable: false,
+          },
+          {
+            name: 'plot_type',
+            type: 'plot_type_enum',
             isNullable: false,
           },
           {

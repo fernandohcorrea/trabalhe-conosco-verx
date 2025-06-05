@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import { RuralProperty } from './rural-property.entity';
 import { HarvestProduction } from './harvest-production.entity';
+import { PlotType } from '../constants/database-types';
 
 @Entity({ name: 'plots' })
 export class Plot {
@@ -24,6 +25,13 @@ export class Plot {
 
   @Column()
   rural_property_id: number;
+
+  @Column({
+    type: 'enum',
+    enum: [PlotType.RESERVED, PlotType.PLANTING_AREA],
+    default: PlotType.PLANTING_AREA,
+  })
+  plot_type: PlotType.RESERVED | PlotType.PLANTING_AREA;
 
   @Column('numeric', { precision: 8, scale: 3 })
   hectares: number;

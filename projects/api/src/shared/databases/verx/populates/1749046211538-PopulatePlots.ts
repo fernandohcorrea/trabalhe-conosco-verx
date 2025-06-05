@@ -1,5 +1,6 @@
 import { QueryRunner } from 'typeorm';
 import { countDataTable, getData } from '../../utils/data';
+import { PlotType } from '../constants/database-types';
 
 export class PopulatePlots1749046211538 {
   public async up(
@@ -27,11 +28,11 @@ export class PopulatePlots1749046211538 {
         );
 
         const query = [
-          `INSERT INTO plots (rural_property_id, name, hectares) VALUES`,
+          `INSERT INTO plots (rural_property_id, name, plot_type, hectares) VALUES`,
           data_plots
             .map(
               (plot) =>
-                `('${plot.rural_property_id}', '${plot.name}', '${plot.hectares}')`,
+                `('${plot.rural_property_id}', '${plot.name}', '${plot.plot_type}', '${plot.hectares}')`,
             )
             .join(','),
         ].join(' ');
@@ -50,10 +51,12 @@ export class PopulatePlots1749046211538 {
       Number(rural_property.hectares),
       populate_factor + 1,
     );
-    for (let i = 0; i < populate_factor; i++) {
+    for (let i = 0; i < populate_factor + 1; i++) {
+      const plot_type = i === 0 ? PlotType.RESERVED : PlotType.PLANTING_AREA;
       plots_data.push({
         rural_property_id: rural_property.id,
         name: `Talhão ${i}`,
+        plot_type,
         hectares: plots_hectares[i].valorHectares,
       });
     }
