@@ -33,6 +33,7 @@ export class CreateTableRuralProperties1748885125153
             name: 'name',
             type: 'varchar(150)',
             isNullable: false,
+            isUnique: true,
           },
           {
             name: 'hectares',
