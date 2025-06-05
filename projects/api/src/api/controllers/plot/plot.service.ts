@@ -54,6 +54,90 @@ export class PlotService {
     }
   }
 
+  async updateData(
+    id: number,
+    dataDto: CreatePlotDTO,
+  ): Promise<{ success: boolean }> {
+    const plot = await this.plotRepository.findOneBy({
+      id,
+      rural_property_id: dataDto.rural_property_id,
+    });
+
+    if (!plot) {
+      throw new HttpCustomException({
+        status: HttpStatus.NOT_FOUND,
+        message: 'Plot not found!',
+      });
+    }
+
+    plot.name = dataDto.name;
+    plot.plot_type = dataDto.plot_type;
+    plot.hectares = dataDto.hectares;
+
+    const validateHectares = await this.validateHectares(
+      plot,
+      dataDto.rural_property_id,
+    );
+
+    if (!validateHectares.status) {
+      throw new HttpCustomException({
+        status: HttpStatus.CONFLICT,
+        message: validateHectares.message,
+      });
+    }
+
+    try {
+      const result = await this.plotRepository.update(plot.id, plot);
+
+      if (result.affected === 0) {
+        throw new HttpCustomException({
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: 'Error to update Plot!',
+        });
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error(error);
+
+      throw new HttpCustomException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Failed to Update Plot!',
+      });
+    }
+  }
+
+  async deleteData(id: number): Promise<{ success: boolean }> {
+    const plot = await this.plotRepository.findOneBy({ id });
+
+    if (!plot) {
+      throw new HttpCustomException({
+        status: HttpStatus.NOT_FOUND,
+        message: 'Plot not found!',
+      });
+    }
+
+    try {
+      const result = await this.plotRepository.softDelete(id);
+
+      if (result.affected === 0) {
+        throw new HttpCustomException({
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          message: 'Error to delete Plot!',
+        });
+      }
+
+      return { success: true };
+    } catch (error) {
+      console.error(error);
+
+      throw new HttpCustomException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Failed to Delete Plot!',
+      });
+    }
+  }
+
   private async validateHectares(
     plot: Plot,
     rural_property_id: number,

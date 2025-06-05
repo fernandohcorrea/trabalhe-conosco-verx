@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 import { PlotType } from 'src/shared/databases/verx/constants/database-types';
 
-export class CreatePlotDTO {
+export class UpdatePlotDTO {
   @IsNotEmpty()
   @IsNumber()
   rural_property_id: number;
