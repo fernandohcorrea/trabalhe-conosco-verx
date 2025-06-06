@@ -8,10 +8,12 @@ import { PlotModule } from './controllers/plot/plot.module';
 import { HarvestModule } from './controllers/harvest/harvest.module';
 import { RuralProductionItemModule } from './controllers/rural-production-item/rural-production-item.module';
 import { HarvestProductionModule } from './controllers/harvest-production/harvest-production.module';
+import { DashboardModule } from './controllers/dashboard/dashboard.module';
 @Module({
   imports: [
     CfgModule,
     SharedModule,
+    DashboardModule,
     RuralProducerModule,
     AddressModule,
     RuralPropertyModule,
