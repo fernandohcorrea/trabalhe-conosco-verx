@@ -1,0 +1,542 @@
+{
+	"info": {
+		"_postman_id": "315d90ba-93e4-4dce-ac1d-dc2c6e19ea63",
+		"name": "VERX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "273446"
+	},
+	"item": [
+		{
+			"name": "dashboard",
+			"item": [
+				{
+					"name": "dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/rural-production-item",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-production-item"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rural-producer",
+			"item": [
+				{
+					"name": "rural-producer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/rural-producer",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-producer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rural-producer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Fernando\",\n    \"document\" : \"26520504000126\",\n    \"document_type\": \"CNPJ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/rural-producer",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-producer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rural-producer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Fernando\",\n    \"document\" : \"26520504000126\",\n    \"document_type\": \"CNPJ\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/rural-producer/4",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-producer",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rural-producer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/rural-producer/15",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-producer",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rural-producer-attach-address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"address_id\": 4,\n  \"rural_producer_id\":4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/rural-producer/attach-address",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-producer",
+								"attach-address"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "address",
+			"item": [
+				{
+					"name": "address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/address",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"street\": \"asd\",\n    \"number\": \"654\",\n    \"complement\": \"APTO\",\n    \"city\" : \"São Paulo\",\n    \"state\": \"SP\",\n    \"zip_code\" : \"03140-030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/address",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"street\": \"asd\",\n    \"number\": \"654\",\n    \"city\" : \"São Paulo\",\n    \"state\": \"MT\",\n    \"zip_code\" : \"03140-030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/address/6",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"address",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rural-property",
+			"item": [
+				{
+					"name": "rural-property",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/rural-property",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-property"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rural-property",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rural_producer_id\": 4,\n    \"address_id\": 4,\n    \"name\": \"Fazendinha do Fefo\",\n    \"hectares\": 2.33\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/rural-property",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-property"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rural-property",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rural_producer_id\": 4,\n    \"address_id\": 4,\n    \"name\": \"Fazendinha do Fefo 3\",\n    \"hectares\": 2.33\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/rural-property/:id",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-property",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rural-property",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/rural-property/:id",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-property",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "plot",
+			"item": [
+				{
+					"name": "plot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/plot?rural_property_id=3",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"plot"
+							],
+							"query": [
+								{
+									"key": "rural_property_id",
+									"value": "3"
+								},
+								{
+									"key": "",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "plot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rural_property_id\" : 3,\n    \"name\" : \"Talhão 00\",\n    \"plot_type\": \"RESERVED\",\n    \"hectares\" : 0.001\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/plot",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"plot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "plot",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rural_property_id\" : 3,\n    \"name\" : \"Talhão 000\",\n    \"plot_type\": \"RESERVED\",\n    \"hectares\" : 0.001\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/plot/:id",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"plot",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "plot",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/plot/:id",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"plot",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "16"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "harvest",
+			"item": [
+				{
+					"name": "harvest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/harvest",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"harvest"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rural-production-item",
+			"item": [
+				{
+					"name": "rural-production-item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/rural-production-item",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"rural-production-item"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "harvest-production",
+			"item": [
+				{
+					"name": "harvest-production",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/harvest-production",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"harvest-production"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
